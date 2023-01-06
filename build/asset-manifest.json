@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mvp-web-firebase-student/static/css/main.d5ad7839.css",
+    "main.js": "/mvp-web-firebase-student/static/js/main.5261ec95.js",
+    "static/js/787.cd1cccde.chunk.js": "/mvp-web-firebase-student/static/js/787.cd1cccde.chunk.js",
+    "index.html": "/mvp-web-firebase-student/index.html",
+    "main.d5ad7839.css.map": "/mvp-web-firebase-student/static/css/main.d5ad7839.css.map",
+    "main.5261ec95.js.map": "/mvp-web-firebase-student/static/js/main.5261ec95.js.map",
+    "787.cd1cccde.chunk.js.map": "/mvp-web-firebase-student/static/js/787.cd1cccde.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d5ad7839.css",
+    "static/js/main.5261ec95.js"
+  ]
+}
