@@ -1,2 +1,4 @@
 # mvp-web-firebase-student
-2023 mvp-web-firebase-student
+Anodiam MVP app for students with Firebase backend
+
+MAIN BRANCH
