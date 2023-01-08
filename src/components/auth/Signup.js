@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import LinkWithCaption from '../layouts/LinkWithCaption';
 import PageHeader from '../layouts/PageHeader';
 import PageMessage from '../layouts/PageMessage';
 import PasswordConfirmMeter from './util/PasswordConfirmMeter ';
@@ -102,10 +103,12 @@ function Signup() {
           onCut={(e)=>e.preventDefault()} onCopy={(e)=>e.preventDefault()} onPaste={(e)=>e.preventDefault()} />
           <PasswordConfirmMeter credentials={credentials} />
         </div>
-        <div className="input-field btn-width">
+        <div className="input-field">
           <button className="btn theme-btn lighten-1 z-depth-0">Sign Up</button>
         </div>
       </form>
+      <LinkWithCaption linkCaption={{caption: 'Already an user?', link: '/signin', linkText: 'Login here.'}}/>
+      <LinkWithCaption linkCaption={{caption: '', link: '/resetpassword', linkText: 'Forgot / Reset password!'}}/>
     </div>
   );
 }

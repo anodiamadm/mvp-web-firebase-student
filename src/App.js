@@ -13,6 +13,7 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
+        <Route path="mvp-web-firebase-student" element={<Home />} />
         <Route path="profile" element={<MyProfile />} />
         <Route path="courses" element={<MyCourses />} />
         <Route path="signup" element={<Signup />} />

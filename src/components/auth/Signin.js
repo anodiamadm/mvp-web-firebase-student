@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import LinkWithCaption from '../layouts/LinkWithCaption';
 import PageHeader from '../layouts/PageHeader';
 import PageMessage from '../layouts/PageMessage';
 import ShowHidePassword from './util/ShowHidePassword';
@@ -64,10 +65,12 @@ function Signin() {
           onCut={(e)=>e.preventDefault()} onCopy={(e)=>e.preventDefault()} onPaste={(e)=>e.preventDefault()} />
         </div>
         <ShowHidePassword toggleShowHidePassword={toggleShowHidePassword} />
-        <div className="input-field btn-width">
+        <div className="input-field">
           <button className="btn theme-btn lighten-1 z-depth-0">Login</button>
         </div>
       </form>
+      <LinkWithCaption linkCaption={{caption: 'Not yet registered?', link: '/signup', linkText: 'Sign up now!'}}/>
+      <LinkWithCaption linkCaption={{caption: '', link: '/resetpassword', linkText: 'Forgot / Reset password!'}}/>
     </div>
   );
 }
