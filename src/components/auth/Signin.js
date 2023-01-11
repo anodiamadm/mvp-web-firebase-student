@@ -25,7 +25,7 @@ function Signin() {
       document.getElementById("hidePasswordText").hidden=true;
     }
   }
-  const { login } = useUserAuth()
+  const { user, login } = useUserAuth()
   const navigate = useNavigate()
   const handleCredentialsSubmit= async (e)=>{
     setIsPending(true)
@@ -48,7 +48,7 @@ function Signin() {
     } else {
       try {
         await login(credentials.email, credentials.password)
-        console.log('Break Point 1');
+        console.log('Break Point 1', user.email);
         navigate('/profile')
         console.log('Break Point 2');
       } catch(err) {
