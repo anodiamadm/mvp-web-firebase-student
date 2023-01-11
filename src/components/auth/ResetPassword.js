@@ -1,18 +1,16 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useUserAuth } from '../../context/UserAuthContext';
 import LinkWithCaption from '../layouts/LinkWithCaption';
 import PageHeader from '../layouts/PageHeader';
 import PageMessage from '../layouts/PageMessage';
 import PasswordConfirmMeter from './util/PasswordConfirmMeter ';
-import PasswordStrengthMeter from './util/PasswordStrengthMeter';
 import ShowHidePassword from './util/ShowHidePassword';
 
-function Signup() {
+function ResetPassword() {
   const [isPending, setIsPending] = useState(false)
   const [errMsg, setErrMsg] = useState([])
   let errArray = []
-  const [credentials, setCredentials] = useState({firstName: '', lastName: '', email: '', password: '', confirmPassword: ''})
+  const [credentials, setCredentials] = useState({email: '', password: '', confirmPassword: ''})
   const onCredentialsChange=(e)=>{
     setCredentials(values=> ({...values, [e.target.id]: e.target.value }))
   }
@@ -29,17 +27,11 @@ function Signup() {
       document.getElementById("hidePasswordText").hidden=true;
     }
   }
-  const { signUp, login } = useUserAuth()
   const navigate = useNavigate()
   const handleCredentialsSubmit= async (e)=>{
-    setErrMsg([])
     setIsPending(true)
+    setErrMsg([])
     e.preventDefault();
-    if(credentials.firstName.length<2 || credentials.firstName.length>40) {
-      errArray.push({field: 'firstName', msg: {type: 'validation', desc: 'must be 2 to 40 chars.'}})
-    } else {
-      errArray.filter((item) => item.field !== 'firstName')
-    }
     if(credentials.email.length<7 || credentials.email.length>40) {
       errArray.push({field: 'email', msg: {type: 'validation', desc: 'must be 7 to 40 chars.'}})
     } else {
@@ -47,59 +39,35 @@ function Signup() {
     }
     if(credentials.password.length<7 || credentials.password.length>40 || credentials.password.includes(credentials.email)
       || !(/[a-z]/.test(credentials.password)) || !(/[A-Z]/.test(credentials.password))
-      || !(/[0-9]/.test(credentials.password)) || !(/[@#$%^&+=]/.test(credentials.password))
-      || credentials.password.includes(credentials.firstName)) {
-      errArray.push({field: 'password', msg: {type: 'validation', desc: 'must contain 7 to 40 small, CAPS, nums, spl chars; not email / name'}})
+      || !(/[0-9]/.test(credentials.password)) || !(/[@#$%^&+=]/.test(credentials.password))) {
+      errArray.push({field: 'password', msg: {type: 'validation', desc: 'must be complex, 7 to 40 chars.'}})
     } else {
       errArray.filter((item) => item.field !== 'password')
-    }
-    if(credentials.password!==credentials.confirmPassword) {
-      errArray.push({field: 'confirmPassword', msg: {type: 'validation', desc: 'must match.'}})
-    } else {
-      errArray.filter((item) => item.field !== 'confirmPassword')
     }
     if (errArray.length!==0) {
       setErrMsg(errArray)
     } else {
       try {
-        await signUp(credentials.email, credentials.password)
-        await login(credentials.email, credentials.password)
+        // await resetPassword(credentials.email, credentials.password) //Functionality to be developed
+        errArray.push({field: 'page', msg: {type: 'failure', desc: 'Reset password functionality coming soon: ' + credentials.email }})
         navigate('/profile')
       } catch(err) {
-        if(err.message.includes('email-already-in-use')) {
-          errArray.push({field: 'email', msg: {type: 'failure', desc: 'User already registered!'}})
-        } else {
-          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message}})
-        }
+        errArray.push({field: 'page', msg: {type: 'failure', desc: err.message}})
       } finally {
         setErrMsg(errArray)
       }
     }
     setIsPending(false)
-  }
+  }  
   return (
     <div className="page-body c777">
-      <PageHeader pageTitle={{bold: 'Sign up', normal: 'with Anodiam'}}/>
+      <PageHeader pageTitle={{bold: 'Reset', normal: 'Anodiam password'}}/>
       { errMsg.some(msg=>msg.field==='page') && <PageMessage msg={(errMsg.filter((item)=>item.field==='page'))[0].msg}/> }
       <form onSubmit={handleCredentialsSubmit} className="anodiam-form">
         <div className="input-field">
-          <label htmlFor='firstName'>First-Name...&nbsp;&nbsp;<span className='error-in-field s14'>
-            { errMsg.some(msg=>msg.field==='firstName') && (errMsg.filter((item)=>item.field==='firstName'))[0].msg.desc }
-          </span></label>
-          <input type="text" id='firstName' autoComplete="on" required onChange={onCredentialsChange}
-          onCut={(e)=>e.preventDefault()} onCopy={(e)=>e.preventDefault()} onPaste={(e)=>e.preventDefault()} />
-        </div>
-        <div className="input-field">
-          <label htmlFor='lastName'>Last-Name...&nbsp;&nbsp;<span className='error-in-field s14'>
-            { errMsg.some(msg=>msg.field==='lastName') && (errMsg.filter((item)=>item.field==='lastName'))[0].msg.desc }
-          </span></label>
-          <input type="text" id='lastName' autoComplete="on" onChange={onCredentialsChange}
-          onCut={(e)=>e.preventDefault()} onCopy={(e)=>e.preventDefault()} onPaste={(e)=>e.preventDefault()} />
-        </div>
-        <div className="input-field">
           <label htmlFor='email'>Email...&nbsp;&nbsp;<span className='error-in-field s14'>
             { errMsg.some(msg=>msg.field==='email') && (errMsg.filter((item)=>item.field==='email'))[0].msg.desc }
-          </span></label> 
+          </span></label>
           <input type="email" id='email' autoComplete="on" required onChange={onCredentialsChange}
           onCut={(e)=>e.preventDefault()} onCopy={(e)=>e.preventDefault()} onPaste={(e)=>e.preventDefault()} />
         </div>
@@ -107,9 +75,8 @@ function Signup() {
           <label htmlFor='password'>Password...&nbsp;&nbsp;<span className='error-in-field s14'>
             { errMsg.some(msg=>msg.field==='password') && (errMsg.filter((item)=>item.field==='password'))[0].msg.desc }
           </span></label>
-          <input type="password" id='password' autoComplete="off" required onChange={onCredentialsChange}
+          <input type="password" id='password' autoComplete="on" required onChange={onCredentialsChange}
           onCut={(e)=>e.preventDefault()} onCopy={(e)=>e.preventDefault()} onPaste={(e)=>e.preventDefault()} />
-          <PasswordStrengthMeter credentials={credentials} />
         </div>
         <ShowHidePassword toggleShowHidePassword={toggleShowHidePassword} />
         <div className="input-field">
@@ -121,14 +88,13 @@ function Signup() {
           <PasswordConfirmMeter credentials={credentials} />
         </div>
         <div className="input-field">
-          { !isPending && <button className="btn theme-btn lighten-1 z-depth-0">Sign Up</button>}
-          { isPending && <button className="btn theme-btn lighten-2 z-depth-0 disabled">Signung up...</button>}
+          { !isPending && <button className="btn theme-btn lighten-1 z-depth-0">Reset</button>}
+          { isPending && <button className="btn theme-btn lighten-2 z-depth-0 disabled">Resetting...</button>}
         </div>
       </form>
-      <LinkWithCaption linkCaption={{caption: 'Already an user?', link: '/', linkText: 'Login here.'}}/>
-      <LinkWithCaption linkCaption={{caption: '', link: '/reset', linkText: 'Forgot / Reset password!'}}/>
+      <LinkWithCaption linkCaption={{caption: 'Not yet registered?', link: '/signup', linkText: 'Sign up now!'}}/>
     </div>
   );
 }
 
-export default Signup
+export default ResetPassword

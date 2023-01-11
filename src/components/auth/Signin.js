@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useUserAuth } from '../../context/UserAuthContext';
 import LinkWithCaption from '../layouts/LinkWithCaption';
 import PageHeader from '../layouts/PageHeader';
 import PageMessage from '../layouts/PageMessage';
 import ShowHidePassword from './util/ShowHidePassword';
 
 function Signin() {
+  const [isPending, setIsPending] = useState(false)
   const [errMsg, setErrMsg] = useState([])
   let errArray = []
   const [credentials, setCredentials] = useState({email: '', password: ''})
@@ -22,7 +25,11 @@ function Signin() {
       document.getElementById("hidePasswordText").hidden=true;
     }
   }
-  const handleCredentialsSubmit=(e)=>{
+  const { login } = useUserAuth()
+  const navigate = useNavigate()
+  const handleCredentialsSubmit= async (e)=>{
+    setIsPending(true)
+    setErrMsg([])
     e.preventDefault();
     if(credentials.email.length<7 || credentials.email.length>40) {
       errArray.push({field: 'email', msg: {type: 'validation', desc: 'must be 7 to 40 chars.'}})
@@ -36,14 +43,27 @@ function Signin() {
     } else {
       errArray.filter((item) => item.field !== 'password')
     }
-    if (errArray.length===0) {
-      /********************************/
-      console.log('Login with valid credentials: ', credentials);
-      /********************************/
-      setErrMsg([])
-    } else {
+    if (errArray.length!==0) {
       setErrMsg(errArray)
+    } else {
+      try {
+        await login(credentials.email, credentials.password)
+        console.log('Break Point 1');
+        navigate('/profile')
+        console.log('Break Point 2');
+      } catch(err) {
+        if(err.message.includes('wrong-password')) {
+          errArray.push({field: 'password', msg: {type: 'failure', desc: 'Wrong Password!'}})
+        } else if(err.message.includes('user-not-found')) {
+          errArray.push({field: 'email', msg: {type: 'failure', desc: 'Email not registered!'}})
+        } else {
+          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message}})
+        }
+      } finally {
+        setErrMsg(errArray)
+      }
     }
+    setIsPending(false)
   }  
   return (
     <div className="page-body c777">
@@ -66,11 +86,12 @@ function Signin() {
         </div>
         <ShowHidePassword toggleShowHidePassword={toggleShowHidePassword} />
         <div className="input-field">
-          <button className="btn theme-btn lighten-1 z-depth-0">Login</button>
+          { !isPending && <button className="btn theme-btn lighten-1 z-depth-0">Login</button>}
+          { isPending && <button className="btn theme-btn lighten-2 z-depth-0 disabled">Loging in...</button>}
         </div>
       </form>
       <LinkWithCaption linkCaption={{caption: 'Not yet registered?', link: '/signup', linkText: 'Sign up now!'}}/>
-      <LinkWithCaption linkCaption={{caption: '', link: '/resetpassword', linkText: 'Forgot / Reset password!'}}/>
+      <LinkWithCaption linkCaption={{caption: '', link: '/reset', linkText: 'Forgot / Reset password!'}}/>
     </div>
   );
 }
