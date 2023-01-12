@@ -29,7 +29,7 @@ function Signup() {
       document.getElementById("hidePasswordText").hidden=true;
     }
   }
-  const { signUp, login } = useUserAuth()
+  const { signUp } = useUserAuth()
   const navigate = useNavigate()
   const handleCredentialsSubmit= async (e)=>{
     setErrMsg([])
@@ -63,7 +63,7 @@ function Signup() {
     } else {
       try {
         await signUp(credentials.email, credentials.password)
-        await login(credentials.email, credentials.password)
+        await new Promise(res => setTimeout(res, 0));  // PATCH code to ensure user information is grabbed during signUp()
         navigate('/profile')
       } catch(err) {
         if(err.message.includes('email-already-in-use')) {
