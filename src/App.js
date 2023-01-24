@@ -9,6 +9,7 @@ import MyCourses from './components/screens/MyCourses';
 import Signin from './components/auth/Signin';
 import NotFound from './components/layouts/NotFound';
 import ResetPassword from './components/auth/ResetPassword';
+import EmailLinkLogin from './components/auth/EmailLinkLogin';
 
 function App() {
   const router = createBrowserRouter(
@@ -18,6 +19,7 @@ function App() {
         <Route path="mvp-web-firebase-student" element={<Signin />} />
         <Route path="signup" element={<Signup />} />
         <Route path="reset" element={<ResetPassword />} />
+        <Route path="passwordless" element={<EmailLinkLogin />} />
         <Route path="profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
         <Route path="courses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
         <Route path="home" element={<ProtectedRoute><Home /></ProtectedRoute>} />

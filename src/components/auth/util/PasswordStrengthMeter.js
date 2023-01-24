@@ -10,8 +10,8 @@ const PasswordStrengthMeter = ({ credentials }) => {
       if (credentials.password.length>=8 && credentials.password.length<=128) {
         ++passwordStrength;
       }
-      // 2. Does NOT contain the username / email or firstname string
-      if (!credentials.password.includes(credentials.email) && !credentials.password.includes(credentials.firstName)) {
+      // 2. Does NOT contain the username / email string
+      if (!credentials.password.includes(credentials.email.substring(0,credentials.email.indexOf("@")))) {
         ++passwordStrength;
       }
       // 3. contain at least one small alphabet (a-z), one CAPS alphabet (A-Z) and one numeral (0-9)

@@ -4,7 +4,7 @@ import LinkWithCaption from '../layouts/LinkWithCaption';
 import PageHeader from '../layouts/PageHeader';
 import PageMessage from '../layouts/PageMessage';
 
-function ResetPassword() {
+function EmailLinkLogin() {
   const [isPending, setIsPending] = useState(false)
   const [errMsg, setErrMsg] = useState([])
   let errArray = []
@@ -12,7 +12,7 @@ function ResetPassword() {
   const onCredentialsChange=(e)=>{
     setCredentials(values=> ({...values, [e.target.id]: e.target.value }))
   }
-  const { sendResetEmail } = useUserAuth()
+  const { passwordlessLogin } = useUserAuth()
   const handleCredentialsSubmit= async (e)=>{
     setErrMsg([])
     setIsPending(true)
@@ -26,9 +26,10 @@ function ResetPassword() {
       setErrMsg(errArray)
     } else {
       try {
-        await sendResetEmail(credentials.email)
-        await new Promise(res => setTimeout(res, 0));  // PATCH code
-        errArray.push({field: 'page', msg: {type: 'success', desc: `Reset link sent to ${credentials.email}!`}})
+        const respo = await passwordlessLogin(credentials.email)
+        if (respo!== null) {
+          errArray.push({field: 'page', msg: {type: 'success', desc: `Login link sent to ${credentials.email}!`}})
+        }
       } catch(err) {
         if(err.message.includes('user-not-found')) {
           errArray.push({field: 'email', msg: {type: 'failure', desc: `${credentials.email} is not yet registered!`}})
@@ -43,7 +44,7 @@ function ResetPassword() {
   }
   return (
     <div className="page-body c777">
-      <PageHeader pageTitle={{bold: 'Reset', normal: 'Anodiam password'}}/>
+      <PageHeader pageTitle={{bold: 'Passwordless', normal: 'login'}}/>
       { errMsg.some(msg=>msg.field==='page') && <PageMessage msg={(errMsg.filter((item)=>item.field==='page'))[0].msg}/> }
       <form onSubmit={handleCredentialsSubmit} className="anodiam-form">
         <div className="input-field">
@@ -54,15 +55,13 @@ function ResetPassword() {
           onCut={(e)=>e.preventDefault()} onCopy={(e)=>e.preventDefault()} onPaste={(e)=>e.preventDefault()} />
         </div>
         <div className="input-field">
-          { !isPending && <button className="btn theme-btn lighten-1 z-depth-0">Reset</button>}
-          { isPending && <button className="btn theme-btn lighten-2 z-depth-0 disabled">Resetting...</button>}
+          { !isPending && <button className="btn theme-btn lighten-1 z-depth-0">Send Email</button>}
+          { isPending && <button className="btn theme-btn lighten-2 z-depth-0 disabled">Sending Email...</button>}
         </div>
       </form>
-      <LinkWithCaption linkCaption={{caption: 'Remember your password?', link: '/', linkText: 'Login here'}}/>
       <LinkWithCaption linkCaption={{ caption: 'Not yet registered?', link: '/signup', linkText: 'Sign up now!' }} />
-      <LinkWithCaption linkCaption={{ caption: `Try Anodiam's`, link: '/passwordless', linkText: 'passwordless login!' }} />
     </div>
   );
 }
 
-export default ResetPassword
+export default EmailLinkLogin

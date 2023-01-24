@@ -39,7 +39,7 @@ function Signin() {
     if (credentials.password.length < 7 || credentials.password.length > 40 || credentials.password.includes(credentials.email)
       || !(/[a-z]/.test(credentials.password)) || !(/[A-Z]/.test(credentials.password))
       || !(/[0-9]/.test(credentials.password)) || !(/[@#$%^&+=]/.test(credentials.password))) {
-      errArray.push({ field: 'password', msg: { type: 'validation', desc: 'must be complex, 7 to 40 chars.' } })
+      errArray.push({ field: 'password', msg: { type: 'validation', desc: 'must be 7 to 40 characters long; containing small, CAPS, numbers and special characters. If you have recently reset your password to a simple srting, reset again to be a valid and complex password.' } })
     } else {
       errArray.filter((item) => item.field !== 'password')
     }
@@ -48,7 +48,7 @@ function Signin() {
     } else {
       try {
         await login(credentials.email, credentials.password)
-        await new Promise(res => setTimeout(res, 0));  // PATCH code to ensure user information is grabbed during login()
+        await new Promise(res => setTimeout(res, 0));  // PATCH code
         navigate('/home')
       } catch (err) {
         if (err.message.includes('wrong-password')) {
@@ -91,6 +91,7 @@ function Signin() {
       </form>
       <LinkWithCaption linkCaption={{ caption: 'Not yet registered?', link: '/signup', linkText: 'Sign up now!' }} />
       <LinkWithCaption linkCaption={{ caption: '', link: '/reset', linkText: 'Forgot / Reset password!' }} />
+      <LinkWithCaption linkCaption={{ caption: `Try Anodiam's`, link: '/passwordless', linkText: 'passwordless login!' }} />
     </div>
   );
 }
