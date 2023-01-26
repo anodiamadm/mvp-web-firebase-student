@@ -12,7 +12,7 @@ function EmailLinkLogin() {
   const onCredentialsChange=(e)=>{
     setCredentials(values=> ({...values, [e.target.id]: e.target.value }))
   }
-  const { passwordlessLogin } = useUserAuth()
+  const { passwordlessLogin, isPasswordlessSignIn, passwordlessSignIn } = useUserAuth()
   const handleCredentialsSubmit= async (e)=>{
     setErrMsg([])
     setIsPending(true)
@@ -26,15 +26,27 @@ function EmailLinkLogin() {
       setErrMsg(errArray)
     } else {
       try {
-        const respo = await passwordlessLogin(credentials.email)
-        if (respo!== null) {
+        const respoSendEmail = await passwordlessLogin(credentials.email)
+        if (respoSendEmail!== null) {
+          window.localStorage.setItem('emailForSignIn', credentials.email)
           errArray.push({field: 'page', msg: {type: 'success', desc: `Login link sent to ${credentials.email}!`}})
+        }
+        const respoGetEmail = await isPasswordlessSignIn(window.location.href)
+        if (respoGetEmail!== null) {
+          let mail = window.localStorage.getItem('emailForSignIn');
+          if (!mail) {
+            mail = window.prompt('Please provide your email for confirmation');
+          }
+          const respoSignIn = await passwordlessSignIn(mail, window.location.href)
+          if (respoSignIn!== null) {
+            window.localStorage.removeItem('emailForSignIn');
+          }
         }
       } catch(err) {
         if(err.message.includes('user-not-found')) {
           errArray.push({field: 'email', msg: {type: 'failure', desc: `${credentials.email} is not yet registered!`}})
         } else {
-          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message}})
+          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message.replace('Firebase: ', "Check your connection! ")}})
         }
       } finally {
         setErrMsg(errArray)

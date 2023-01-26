@@ -68,7 +68,7 @@ function Signup() {
         if(err.message.includes('email-already-in-use')) {
           errArray.push({field: 'email', msg: {type: 'failure', desc: `${credentials.email} is already registered!`}})
         } else {
-          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message}})
+          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message.replace('Firebase: ', "Check your connection! ")}})
         }
       } finally {
         setErrMsg(errArray)

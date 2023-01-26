@@ -33,7 +33,7 @@ function ResetPassword() {
         if(err.message.includes('user-not-found')) {
           errArray.push({field: 'email', msg: {type: 'failure', desc: `${credentials.email} is not yet registered!`}})
         } else {
-          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message}})
+          errArray.push({field: 'page', msg: {type: 'failure', desc: err.message.replace('Firebase: ', "Check your connection! ")}})
         }
       } finally {
         setErrMsg(errArray)

@@ -49,14 +49,14 @@ function Signin() {
       try {
         await login(credentials.email, credentials.password)
         await new Promise(res => setTimeout(res, 0));  // PATCH code
-        navigate('/home')
+        navigate('/expt')
       } catch (err) {
         if (err.message.includes('wrong-password')) {
           errArray.push({ field: 'password', msg: { type: 'failure', desc: 'Wrong Password!' } })
         } else if (err.message.includes('user-not-found')) {
           errArray.push({ field: 'email', msg: { type: 'failure', desc: 'Email not registered!' } })
         } else {
-          errArray.push({ field: 'page', msg: { type: 'failure', desc: err.message } })
+          errArray.push({ field: 'page', msg: { type: 'failure', desc: err.message.replace('Firebase: ', "Check your connection! ")} })
         }
       } finally {
         setErrMsg(errArray)

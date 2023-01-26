@@ -5,7 +5,9 @@ import {
   onAuthStateChanged,
   signOut,
   sendPasswordResetEmail,
-  sendSignInLinkToEmail
+  sendSignInLinkToEmail,
+  isSignInWithEmailLink,
+  signInWithEmailLink
 } from "firebase/auth"
 import { auth, actionCodeSettings } from "../firebase"
 
@@ -29,6 +31,12 @@ export const UserAuthContextProvider = ({children}) => {
   const passwordlessLogin = (email) => {
     return sendSignInLinkToEmail(auth, email, actionCodeSettings)
   }
+  const isPasswordlessSignIn = (windowHref) => {
+    return isSignInWithEmailLink(auth, windowHref)
+  }
+  const passwordlessSignIn = (email, windowHref) => {
+    return signInWithEmailLink(auth, email, windowHref)
+  }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (curentUser) => {
       setUser(curentUser)
@@ -37,7 +45,8 @@ export const UserAuthContextProvider = ({children}) => {
       unsubscribe()
     }
   }, [])
-  return <userAuthContext.Provider value={{user, signUp, login, logOut, sendResetEmail, passwordlessLogin}}>{children}</userAuthContext.Provider>
+  return <userAuthContext.Provider value={{user, signUp, login, logOut, sendResetEmail, passwordlessLogin, 
+                                            isPasswordlessSignIn, passwordlessSignIn}}>{children}</userAuthContext.Provider>
 }
 
 export const useUserAuth = () => {

@@ -10,6 +10,7 @@ import Signin from './components/auth/Signin';
 import NotFound from './components/layouts/NotFound';
 import ResetPassword from './components/auth/ResetPassword';
 import EmailLinkLogin from './components/auth/EmailLinkLogin';
+import Experiments from './components/screens/Experiments';
 
 function App() {
   const router = createBrowserRouter(
@@ -21,6 +22,7 @@ function App() {
         <Route path="reset" element={<ResetPassword />} />
         <Route path="passwordless" element={<EmailLinkLogin />} />
         <Route path="profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
+        <Route path="expt" element={<ProtectedRoute><Experiments /></ProtectedRoute>} />
         <Route path="courses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />
         <Route path="home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path='*' element={<NotFound />}/>
