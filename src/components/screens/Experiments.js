@@ -10,12 +10,7 @@ function Experiments() {
   const colRef = collection(db, 'courses')
   getDocs(colRef)
   .then((snapshot) => {
-    console.log(snapshot.docs);
-    // let coll=[]
-    // snapshot.docs.forEach((doc) => {
-    //   coll.push({ ...doc.data(), id: doc.id })
-    // })
-    // setColctn(coll)
+    console.log('DOCS', snapshot.docs);
   })
   .catch(err => {
     console.log("ERROR FOUND", err);

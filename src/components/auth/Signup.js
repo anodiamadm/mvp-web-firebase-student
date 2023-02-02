@@ -57,12 +57,12 @@ function Signup() {
       setErrMsg(errArray)
     } else {
       try {
-        const respSignup = await signUp(credentials.email, credentials.password)
-        if(respSignup.user!==null) {
+        const cred = await signUp(credentials.email, credentials.password)
+        if(cred.user!==null) {
           await new Promise(res => setTimeout(res, 0));  // PATCH code
           navigate('/profile')
         } else {
-          errArray.push({field: 'page', msg: {type: 'failure', desc:`Signup user ${credentials.email} not vaild!`}})
+          errArray.push({field: 'page', msg: {type: 'failure', desc:`Signup error for ${credentials.email}!`}})
         }
       } catch(err) {
         if(err.message.includes('email-already-in-use')) {

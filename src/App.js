@@ -9,7 +9,6 @@ import MyCourses from './components/screens/MyCourses';
 import Signin from './components/auth/Signin';
 import NotFound from './components/layouts/NotFound';
 import ResetPassword from './components/auth/ResetPassword';
-import EmailLinkLogin from './components/auth/EmailLinkLogin';
 import Experiments from './components/screens/Experiments';
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Route path="mvp-web-firebase-student" element={<Signin />} />
         <Route path="signup" element={<Signup />} />
         <Route path="reset" element={<ResetPassword />} />
-        <Route path="passwordless" element={<EmailLinkLogin />} />
         <Route path="profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />
         <Route path="expt" element={<ProtectedRoute><Experiments /></ProtectedRoute>} />
         <Route path="courses" element={<ProtectedRoute><MyCourses /></ProtectedRoute>} />

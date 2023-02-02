@@ -47,9 +47,13 @@ function Signin() {
       setErrMsg(errArray)
     } else {
       try {
-        await login(credentials.email, credentials.password)
-        await new Promise(res => setTimeout(res, 0));  // PATCH code
-        navigate('/expt')
+        const cred = await login(credentials.email, credentials.password)
+        if(cred.user!==null) {
+          await new Promise(res => setTimeout(res, 0));  // PATCH code
+          navigate('/home')
+        } else {
+          errArray.push({field: 'page', msg: {type: 'failure', desc:`Signin error for ${credentials.email}!`}})
+        }
       } catch (err) {
         if (err.message.includes('wrong-password')) {
           errArray.push({ field: 'password', msg: { type: 'failure', desc: 'Wrong Password!' } })

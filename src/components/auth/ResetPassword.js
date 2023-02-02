@@ -26,9 +26,14 @@ function ResetPassword() {
       setErrMsg(errArray)
     } else {
       try {
-        await sendResetEmail(credentials.email)
-        await new Promise(res => setTimeout(res, 0));  // PATCH code
-        errArray.push({field: 'page', msg: {type: 'success', desc: `Reset link sent to ${credentials.email}!`}})
+        const cred = await sendResetEmail(credentials.email)
+        if(cred.user!==null) {
+          await new Promise(res => setTimeout(res, 0));  // PATCH code
+          errArray.push({field: 'page', msg: {type: 'success', desc: `Reset link sent to ${credentials.email}!`}})
+          e.target.email.value = ''
+        } else {
+          errArray.push({field: 'page', msg: {type: 'failure', desc:`Password Reset error for ${credentials.email}!`}})
+        }
       } catch(err) {
         if(err.message.includes('user-not-found')) {
           errArray.push({field: 'email', msg: {type: 'failure', desc: `${credentials.email} is not yet registered!`}})
