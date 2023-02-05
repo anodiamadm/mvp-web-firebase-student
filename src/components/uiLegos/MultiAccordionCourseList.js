@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AccordionContainer, AccordionContent } from './Accordion';
 
-const CourseList = ({items}) => {
+const MultiAccordionCourseList = ({items}) => {
   const [active, setActive] = useState()
   const handleClick = name => {
     setActive(name === active ? null : name)
@@ -37,7 +37,7 @@ const render = () => {
   ]
   return (
     <div style={{width: "100vw", height: "100vh", display: 'grid', placeItems: 'center', backgroundColor: '#0a0a0a'}}>
-      <CourseList items={items} />
+      <MultiAccordionCourseList items={items} />
     </div>
   )
 }

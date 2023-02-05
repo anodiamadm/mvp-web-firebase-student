@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const AccordianContainer = styled.div`
+const AccordionContainer = styled.div`
   overflow: hidden;
   width: 18.75rem;
   border-radius: 0.5rem;
@@ -57,4 +57,4 @@ const AccordionContent = ({onClick, itemName, itemContent, isActive}) => {
   )
 }
 
-export {AccordianContainer, AccordionContent}
+export {AccordionContainer, AccordionContent}
