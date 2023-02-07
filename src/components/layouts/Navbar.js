@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Logo from './Logo';
 import { NavLink } from 'react-router-dom';
 import { useUserAuth } from '../../context/UserAuthContext';
+import SearchBar from '../uiLegos/SearchBar';
 
 const Navbar = () => {
   const [hamburgerIconClicked, setHamburgerIconClicked] = useState(false)
@@ -20,7 +21,10 @@ const Navbar = () => {
     <>
       <nav-anodiam>
         <Logo/>
-        <div>
+        <div className='search-bar-alignment'>
+          <SearchBar/>
+        </div>
+        <div className='main-menu-alignment'>
           <ul id='navbar' className={hamburgerIconClicked ? '#navbar active' : '#navbar'} onClick={toggleHamburgerIcon} >
             { user ?
               <>

@@ -49,7 +49,7 @@ function Signin() {
       try {
         const cred = await login(credentials.email, credentials.password)
         if(cred.user!==null) {
-          await new Promise(res => setTimeout(res, 0));  // PATCH code
+          e.target.reset()
           navigate('/home')
         } else {
           errArray.push({field: 'page', msg: {type: 'failure', desc:`Signin error for ${credentials.email}!`}})

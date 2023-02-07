@@ -27,10 +27,9 @@ function ResetPassword() {
     } else {
       try {
         const cred = await sendResetEmail(credentials.email)
-        if(cred.user!==null) {
-          await new Promise(res => setTimeout(res, 0));  // PATCH code
+        if(cred!==null) {
           errArray.push({field: 'page', msg: {type: 'success', desc: `Reset link sent to ${credentials.email}!`}})
-          e.target.email.value = ''
+          e.target.reset();
         } else {
           errArray.push({field: 'page', msg: {type: 'failure', desc:`Password Reset error for ${credentials.email}!`}})
         }

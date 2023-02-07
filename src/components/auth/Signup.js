@@ -59,8 +59,8 @@ function Signup() {
       try {
         const cred = await signUp(credentials.email, credentials.password)
         if(cred.user!==null) {
-          await new Promise(res => setTimeout(res, 0));  // PATCH code
-          navigate('/profile')
+          e.target.reset()
+          navigate('/home')
         } else {
           errArray.push({field: 'page', msg: {type: 'failure', desc:`Signup error for ${credentials.email}!`}})
         }

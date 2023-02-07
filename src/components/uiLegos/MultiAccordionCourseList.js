@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AccordionContainer, AccordionContent } from './Accordion';
 
-const MultiAccordionCourseList = ({items}) => {
+const MultiAccordionCourseList = ({items, multiple}) => {
   const [active, setActive] = useState()
+  const [activeArray, setActiveArray] = useState([])
+  useEffect(()=> {
+    let p = [...items].map((item)=>{
+      return {name: item.name, active: false}
+    })
+    setActiveArray(p)
+  }, [items])
   const handleClick = name => {
     setActive(name === active ? null : name)
+    if(multiple) {
+      let indx = activeArray.findIndex((i)=>i.name===name)
+      let upd = [...activeArray]
+      upd[indx].active = !upd[indx].active
+      setActiveArray(upd)
+    }
   }
   return (
     <AccordionContainer>
       {items.map(item => {
         let isActive = active === item.name
+        if(multiple) isActive = activeArray.some((i)=>i.name===item.name && i.active)
         return <AccordionContent onClick={()=>handleClick(item.name)}
           itemName={item.name} itemContent={item.content} isActive={isActive} key={item.key}/>
       })}
@@ -37,7 +51,7 @@ const render = () => {
   ]
   return (
     <div style={{width: "100vw", height: "100vh", display: 'grid', placeItems: 'center', backgroundColor: '#0a0a0a'}}>
-      <MultiAccordionCourseList items={items} />
+      <MultiAccordionCourseList multiple items={items} />
     </div>
   )
 }
