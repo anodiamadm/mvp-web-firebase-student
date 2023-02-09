@@ -3,12 +3,22 @@ import SearchModal from "./modals/SearchModal";
 
 const SearchBar = () => {
   const [srchQry, setSrchQry] = useState('')
+  const [openModal, setOpenModal] = useState(false)
   const onSearchQueryChange = (e) =>{
     setSrchQry(e.target.value)
+    if (e.target.value.length>=4 && !openModal) {
+      setOpenModal(true)
+      setIsPending(true)
+    }
+    if(e.target.value.length<4) {
+      setOpenModal(false)
+    }
+    setIsPending(false);
   }
   const handleQuerySubmit = (e)=>{
-    setIsPending(true)
     e.preventDefault();
+    setIsPending(true)
+    setOpenModal(true)
     setIsPending(false);
   }
   const [isPending, setIsPending] = useState(false)
@@ -23,7 +33,7 @@ const SearchBar = () => {
           {isPending && <button className="btn theme-btn lighten-2 z-depth-0 search-button disabled"><i className="fas fa-search"></i></button>}
         </div>
       </form>
-      <SearchModal srchQry={srchQry} />
+      { openModal && <SearchModal srchQry={srchQry} setOpenModal={setOpenModal}/> }
     </div>
   );
 }

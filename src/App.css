@@ -476,8 +476,71 @@ textarea.materialize-textarea:focus:not([readonly]){
   border: none;
   margin-top: -3px;
 }
-
+.modalBackground {
+  z-index: 99;
+  background-color: rgba(223, 233, 223, 0.6);
+  position: relative;
+  top: -3px;
+  left: -20vw;
+  width: 60vw;
+  border-radius: 21px;
+}
+.modalContainer {
+  z-index: 100;
+  position: relative;
+  background-color: rgba(239, 239, 239);
+  border-radius: 20px;
+  min-width: 250px;
+  border: var(--ctheme-lite) solid 1px;
+}
+.modalBtn {
+  float: right;
+  margin: 10px;
+  color: var(--ctheme);
+}
+.modalBtn:active {
+  background-color: var(--cbbb);
+  border-radius: 3px;
+  border: 1px solid var(--c999);
+}
+.search-result-list {
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+.search-result-list-item {
+  margin-bottom: 5px;
+  font-size: 15px;
+  color: var(--c777);
+  font-weight: 300;
+}
+.modalAlert {
+  text-align: center;
+  color: var(--c-msg-red);
+  font-weight: bold;
+  font-size: 16px;
+  padding: 20px;
+  margin: 20px;
+}
+.modalHeader {
+  text-align: center;
+  color: var(--c777);
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px;
+}
+.modalbody {
+  color: var(--c777);
+  font-size: 15px;
+}
 /* Media */
+@media screen and (max-width: 465px) {
+  .modalBackground {
+    left: -40vw;
+    width: 70vw;
+  }
+}
 @media screen and (max-width: 992px) {
   #navbar {
     display: flex;
