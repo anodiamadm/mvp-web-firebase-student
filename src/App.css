@@ -481,8 +481,8 @@ textarea.materialize-textarea:focus:not([readonly]){
   background-color: rgba(223, 233, 223, 0.6);
   position: relative;
   top: -3px;
-  left: -20vw;
-  width: 60vw;
+  left: -16vw;
+  width: 48vw;
   border-radius: 21px;
 }
 .modalContainer {
@@ -523,24 +523,20 @@ textarea.materialize-textarea:focus:not([readonly]){
   margin: 20px;
 }
 .modalHeader {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   color: var(--c777);
   font-weight: bold;
   font-size: 16px;
-  padding: 10px;
-  margin: 10px;
+  padding: 6px;
+  margin: 6px;
 }
 .modalbody {
   color: var(--c777);
   font-size: 15px;
 }
 /* Media */
-@media screen and (max-width: 465px) {
-  .modalBackground {
-    left: -40vw;
-    width: 70vw;
-  }
-}
 @media screen and (max-width: 992px) {
   #navbar {
     display: flex;
@@ -573,5 +569,18 @@ textarea.materialize-textarea:focus:not([readonly]){
   }
   .footer {
     flex-direction: column;
+  }
+  .modalBackground {
+    left: -24vw;
+    width: 60vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .modalBackground {
+    left: -40vw;
+    width: 74vw;
+  }
+  .modalBtn {
+    float: left;
   }
 }

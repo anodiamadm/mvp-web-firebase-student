@@ -45,8 +45,11 @@ export const UserAuthContextProvider = ({children}) => {
       unsubscribe()
     }
   }, [])
-  return <userAuthContext.Provider value={{user, signUp, login, logOut, sendResetEmail, passwordlessLogin, 
-                                            isPasswordlessSignIn, passwordlessSignIn}}>{children}</userAuthContext.Provider>
+  return (
+    <userAuthContext.Provider value={{user, signUp, login, logOut, sendResetEmail, passwordlessLogin, isPasswordlessSignIn, passwordlessSignIn}}>
+      {children}
+    </userAuthContext.Provider>
+  )
 }
 
 export const useUserAuth = () => {
