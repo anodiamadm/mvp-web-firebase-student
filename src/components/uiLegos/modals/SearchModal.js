@@ -1,4 +1,5 @@
 import React from 'react'
+import LocationFilter from '../filters/LocationFilter'
 import TabbedFormSearch from './TabbedFormSearch'
 
 function SearchModal({setOpenModal}) {
@@ -10,6 +11,7 @@ function SearchModal({setOpenModal}) {
           <div>Filters:</div>
           <i className="fa-solid fa-sliders"></i>
         </div>
+        <LocationFilter/>
         <TabbedFormSearch/>
       </div>
     </div>
