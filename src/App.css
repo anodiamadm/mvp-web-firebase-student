@@ -478,20 +478,21 @@ textarea.materialize-textarea:focus:not([readonly]){
 }
 .modalBackground {
   z-index: 99;
-  background-color: rgba(223, 233, 223, 0.6);
+  background-color: var(--ctheme-lite);
+  /* opacity: 0.98; */
   position: relative;
   top: -3px;
   left: -16vw;
   width: 48vw;
-  border-radius: 21px;
+  border-radius: 11px;
+  box-shadow: 0px 0px 10px 10px rgba(191, 191, 191, 0.25);
 }
 .modalContainer {
   z-index: 100;
   position: relative;
-  background-color: rgba(239, 239, 239);
-  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
   min-width: 250px;
-  border: var(--ctheme-lite) solid 1px;
 }
 .modalBtn {
   float: right;
@@ -529,8 +530,17 @@ textarea.materialize-textarea:focus:not([readonly]){
   color: var(--c777);
   font-weight: bold;
   font-size: 16px;
-  padding: 6px;
-  margin: 6px;
+  padding: 10px;
+  margin: 10px;
+  /* border-bottom: 1px solid var(--cccc); */
+}
+.modalSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  color: var(--c777);
+  padding: 10px;
+  margin: 10px;
 }
 .modalbody {
   color: var(--c777);
