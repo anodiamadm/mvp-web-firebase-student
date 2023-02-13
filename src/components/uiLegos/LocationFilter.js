@@ -5,35 +5,21 @@ import { countries } from "../../dataAccess/GeographicalData";
 
 const LocationFilter = () => {
   const [countryList, setCountryList] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState({value: '', label: ''})
+  const [selectedCountry, setSelectedCountry] = useState({value: 'INTL', label: 'International'})
+  const locateCountry = async () => {
+    const resp = await fetch("https://ipinfo.io/json?token=516ec07e26e604")
+    const data = await resp.json()
+    let localCountry = countries.find(country => country.country.id===data.country)
+    setSelectedCountry({value: localCountry.country.id, label: localCountry.country.countryName})
+  }
   useEffect(() => {
     let cntryOptns = []
     countries.map((country) => {
       return (cntryOptns.push({value: country.country.id, label: country.country.countryName}))
     })
     setCountryList(cntryOptns)
-    // if (navigator.geolocation) {
-    //     navigator.geolocation.getCurrentPosition(function(position) {
-    //         $.getJSON('http://ws.geonames.org/countryCode', {
-    //             lat: position.coords.latitude,
-    //             lng: position.coords.longitude,
-    //             type: 'JSON'
-    //         }, function(result) {
-    //             alert(result.countryName);
-    //         });
-    //     })
-    // }​
-    function success(pos) {
-      const crd = pos.coords;
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-    }
-    navigator.geolocation.getCurrentPosition(success);
-    console.log('Selected Country: ', selectedCountry)
-    if (selectedCountry.value==='') {
-      setSelectedCountry({value: 'INTL', label: 'International'})
-    }
-  }, [selectedCountry])
+    locateCountry()
+  }, [])
   const handleChange = e => {
     setSelectedCountry(e)
   }
@@ -42,9 +28,11 @@ const LocationFilter = () => {
       <div className="modalSection">
         <label>Country: </label>
         { selectedCountry.value==='INTL' ? 
-          <i className="fa-solid fa-globe"></i> : 
+          <i className="fa-solid fa-globe theme-color"></i> : 
           <Flag country={selectedCountry.value} />}
-        <Select options={countryList} onChange={handleChange} />
+        <Select value={selectedCountry} options={countryList} onChange={handleChange} 
+          getOptionValue={(option) => option.value} getOptionLabel={(option) => option.label}
+        />
       </div>
     </>
   );

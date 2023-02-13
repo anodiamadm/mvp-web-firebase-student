@@ -5,7 +5,7 @@ const Logo = () => {
     <div className="logo-box rel page-boundary">
       <NavLink to="/">
         <div className="row-display">
-          <img src={ process.env.PUBLIC_URL + '/resources/anodiamLogoXS.png' } alt='A' className="bl" />
+          <img src={ process.env.PUBLIC_URL + '/resources/anodiamLogo.png' } alt='A' className="bl" />
           <div className="bottom-align">
             <span className="logo-name silent-link">nodiam</span>
           </div>

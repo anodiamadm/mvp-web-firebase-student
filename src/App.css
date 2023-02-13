@@ -2,6 +2,8 @@
 :root {
   --ctheme: #ff8c52;
   --ctheme-lite: #ffac52;
+  /* --ctheme: purple;
+  --ctheme-lite: pink; */
   --c333: #333;
   --c777: #777;
   --c888: #888;
@@ -215,6 +217,11 @@ h6 {
 }
 .bl {
   display: block;
+  height: 70px;
+  background-color: var(--ctheme);
+}
+.theme-color {
+  color: var(--ctheme);
 }
 
 /* Navbar */
