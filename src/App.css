@@ -539,7 +539,18 @@ textarea.materialize-textarea:focus:not([readonly]){
   font-size: 16px;
   padding: 10px;
   margin: 10px;
-  /* border-bottom: 1px solid var(--cccc); */
+}
+.modalBodyText {
+  color: var(--c777);
+  font-weight: Bold;
+  font-size: 14px;
+}
+.modalComponentMargin {
+  padding: 0px;
+  margin: 15px;
+}
+.globe-icon-height {
+  font-size: 20px;
 }
 .modalSection {
   display: flex;
@@ -549,10 +560,25 @@ textarea.materialize-textarea:focus:not([readonly]){
   padding: 10px;
   margin: 10px;
 }
-.modalbody {
-  color: var(--c777);
-  font-size: 15px;
+.caret-down-position {
+  float: right;
+  position: relative;
+  top: -40px;
+  margin-bottom: -40px;
+  margin-right: 2px;
 }
+.caret-down {
+  background-color: var(--ceee);
+  border: var(--caaa) 1px solid;
+  border-radius: 6px;
+  padding: 2.5px 7px;
+}
+.caret-down:hover {
+  border: var(--ctheme-lite) 1.5px solid;
+  color: var(--ctheme-lite);
+  transition: 0.3s ease-in-out;
+}
+
 /* Media */
 @media screen and (max-width: 992px) {
   #navbar {
