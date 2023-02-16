@@ -9,7 +9,8 @@ import MyCourses from './components/screens/MyCourses';
 import Signin from './components/auth/Signin';
 import NotFound from './components/layouts/NotFound';
 import ResetPassword from './components/auth/ResetPassword';
-import Experiments from './components/screens/Experiments';
+// Delete Below and ./Experiments.js in Production
+import Experiments from './Experiments';
 
 function App() {
   const router = createBrowserRouter(
@@ -17,6 +18,8 @@ function App() {
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Signin />} />
         <Route path="mvp-web-firebase-student" element={<Signin />} />
+        {/* Delete Below and ./Experiments.js in Production */}
+        <Route path="xp" element={<Experiments />} />
         <Route path="signup" element={<Signup />} />
         <Route path="reset" element={<ResetPassword />} />
         <Route path="profile" element={<ProtectedRoute><MyProfile /></ProtectedRoute>} />

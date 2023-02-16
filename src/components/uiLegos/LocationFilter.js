@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Flag from "react-flagkit";
 import { countries } from "../../dataAccess/GeographicalData";
-import SelectComponent from "./SelectComponent";
 
 const LocationFilter = () => {
   const [countryList, setCountryList] = useState([])
@@ -20,9 +19,7 @@ const LocationFilter = () => {
     setCountryList(cntryOptns)
     locateCountry()
   }, [])
-  const handleChange = e => {
-    setSelectedCountry(e)
-  }
+  console.log("Countries: ", countryList, "Selected: ", selectedCountry);
   return (
     <>
       <div className="modalSection">
@@ -30,12 +27,6 @@ const LocationFilter = () => {
         { selectedCountry.value==='INTL' ? 
           <i className="fa-solid fa-globe theme-color modalComponentMargin globe-icon-height"></i> : 
           <Flag country={selectedCountry.value} className="modalComponentMargin" />}
-        {/* <select value={selectedCountry} onChange={handleChange}>
-          {countryList.map((country) => {
-            return (<options value={country.value}>{country.label}</options>)
-          })}
-        </select> */}
-        <SelectComponent/>
       </div>
     </>
   );
