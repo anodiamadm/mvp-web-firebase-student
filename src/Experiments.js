@@ -12,7 +12,7 @@ const options = [
   { key: 7, value: 'GE', label: 'Germany'}
 ]
 const Experiments = () => {
-  const [selectedOption, setSelectedOption] = useState(4)
+  const [selectedOption, setSelectedOption] = useState('AU')
   return ( 
     <div className="experiments">
       <p>Selected Option: {selectedOption}</p>

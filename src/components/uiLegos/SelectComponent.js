@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SelectComponent = ({options, placeholder="Select...", onChange, selectedKey}) => {
   const [inputValue, setInputValue] = useState('')
+  const [searchedOptions, setSearchedOptions] = useState([])
   const [open, setOpen] = useState(false)
-  // useEffect(()=>{
-  //   if(selectedKey) {
-  //     setInputValue(options.find(option=>option.key===selectedKey).key)
-  //   }
-  // },[selectedKey, options])
+  useEffect(()=>{
+    if(selectedKey) {
+      setInputValue(options.find(option=>option.value===selectedKey).label)
+    }
+  },[selectedKey, options])
   const onInputChange = (e) => {
     setInputValue(e.target.value)
+    if(e.target.value!=='') {
+      setSearchedOptions(options.filter(opt=>opt.label.toLowerCase().includes(e.target.value.toLowerCase())))
+    } else {
+      setSearchedOptions(options)
+    }
+    setOpen(true)
   }
   const onItemSelected = (option) => {
     onChange !== undefined && onChange(option.value)
@@ -19,9 +26,11 @@ const SelectComponent = ({options, placeholder="Select...", onChange, selectedKe
   const clearDropdown = () => {
     setInputValue("")
     onChange("")
+    setSearchedOptions(options)
   }
   const onInputClick = () => {
-    setOpen(prevValue=>!prevValue)
+    setOpen(!open)
+    setSearchedOptions(options)
   }
   return (
     <>
@@ -36,7 +45,7 @@ const SelectComponent = ({options, placeholder="Select...", onChange, selectedKe
           <div className="input-clear-container" onClick={clearDropdown}><i className="fa-solid fa-circle-xmark"></i></div> :
           null }
         <div className={`dropdown ${open ? "visible" : ""}`}>
-          { options.map(opt => {
+          { searchedOptions.map(opt => {
             return (
               <div key={opt.value} onClick={()=>onItemSelected(opt)} className="option" >
                 {opt.label}
