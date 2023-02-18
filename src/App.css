@@ -596,7 +596,6 @@ textarea.materialize-textarea:focus:not([readonly]){
   display: flex;
   border-bottom: 1px solid var(--cbbb);
   align-items: center;
-  padding-left: 10px;
   cursor: pointer;
   background-color: rgba(223, 223, 223, 0.7);
 }
