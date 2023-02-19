@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useState } from "react";
 import Flag from "react-flagkit";
 import CloseClickingOutside from "./CloseClickingOutside";
 
-const SelectComponent = forwardRef(({options, placeholder="Select...", selectedOption, onChange, open, setOpen}, ref) => {
+const SelectComponent = forwardRef(({options, placeholder="Select...", selectedOption, onChange, open, setOpen, drawFlags}, ref) => {
   const [inputValue, setInputValue] = useState('')
   const [searchedOptions, setSearchedOptions] = useState([])
   useEffect(()=>{
@@ -53,19 +53,30 @@ const SelectComponent = forwardRef(({options, placeholder="Select...", selectedO
             <span><i className="fa fa-caret-down" aria-hidden="true"></i></span>
           </label>
         </div>
-        <div className={`dropdown ${open ? "visible" : ""}`}>
-          { searchedOptions.map(opt => {
-            return (
-              <div key={opt.value} onClick={()=>onItemSelected(opt)} className="option" >
-                { opt.value==='INTL' ?
-                  <i className="fa-solid fa-globe theme-color modalComponentMargin globe-icon-height"></i> :
-                  <Flag country={opt.value} className="modalComponentMargin" />
-                }
-                {opt.label}
-              </div>
-            )
-          })}
-        </div>
+        { drawFlags ? 
+          <div className={`dropdown ${open ? "visible" : ""}`}>
+            { searchedOptions.map(opt => {
+              return (
+                <div key={opt.value} onClick={()=>onItemSelected(opt)} className="option" >
+                  { opt.value==='INTL' ?
+                    <i className="fa-solid fa-globe theme-color modalComponentMargin globe-icon-height"></i> :
+                    <Flag country={opt.value} className="modalComponentMargin" />
+                  }
+                  {opt.label}
+                </div>
+              )
+            })}
+          </div> :
+          <div className={`dropdown ${open ? "visible" : ""}`}>
+            { searchedOptions.map(opt => {
+              return (
+                <div key={opt.value} onClick={()=>onItemSelected(opt)} className="option" >
+                  {opt.label}
+                </div>
+              )
+            })}
+          </div>
+        }
       </div>
     </div>
   );

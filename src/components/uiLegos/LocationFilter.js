@@ -18,11 +18,10 @@ const LocationFilter = () => {
       return (prvncOptns.push({value: state.stateId, label: state.stateName}))
     })
     setProvinceList(prvncOptns)
-    console.log("Province List: ", prvncOptns);
   }
   const setProvincesForCountryId = (countryId) => {
     let prvncOptns = []
-    let localCountry = countries.find(country=>country.country.id===selectedCountry)
+    let localCountry = countries.find(country=>country.country.id===countryId)
     localCountry.country.states.map((state)=>{
       return (prvncOptns.push({value: state.stateId, label: state.stateName}))
     })
@@ -52,6 +51,9 @@ const LocationFilter = () => {
     setProvincesForCountryId(countryId)
     setSelectedProvince('')
   }
+  // useEffect(()=>{
+  //   console.log("Selected Country Changed", selectedCountry);
+  // }, [selectedCountry])
   return (
     <>
       <div className="modalSection">
@@ -61,12 +63,12 @@ const LocationFilter = () => {
           <Flag country={selectedCountry} className="modalComponentMargin" />}
         { countryList.length > 0 ?
           <SelectComponent placeholder="Country..." options={countryList} 
-            onChange={onCountryChange} selectedOption={selectedCountry} />
+            onChange={onCountryChange} selectedOption={selectedCountry} drawFlags={true} />
           : null
         }
-        <p>{ selectedProvince!=='' ? selectedProvince : null }</p>
         <SelectComponent placeholder="State / Province..." options={provinceList} 
-        onChange={(province)=>setSelectedProvince(province)} selectedOption={selectedProvince} />
+        onChange={(province)=>setSelectedProvince(province)} selectedOption={selectedProvince} drawFlags={false} />
+        <p>{ selectedProvince!=='' ? selectedProvince : null }</p>
       </div>
     </>
   );

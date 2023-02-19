@@ -612,6 +612,7 @@ textarea.materialize-textarea:focus:not([readonly]){
   width: 100%;
   color: var(--c777);
   display: none;
+  font-size: 12px;
 }
 .dropdown.visible {
   display: block;
