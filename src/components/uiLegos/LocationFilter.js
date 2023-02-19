@@ -51,9 +51,6 @@ const LocationFilter = () => {
     setProvincesForCountryId(countryId)
     setSelectedProvince('')
   }
-  // useEffect(()=>{
-  //   console.log("Selected Country Changed", selectedCountry);
-  // }, [selectedCountry])
   return (
     <>
       <div className="modalSection">
@@ -68,7 +65,7 @@ const LocationFilter = () => {
         }
         <SelectComponent placeholder="State / Province..." options={provinceList} 
         onChange={(province)=>setSelectedProvince(province)} selectedOption={selectedProvince} drawFlags={false} />
-        <p>{ selectedProvince!=='' ? selectedProvince : null }</p>
+        <p>{ selectedProvince!=='' ? selectedProvince : "Nothing Selected" }</p>
       </div>
     </>
   );

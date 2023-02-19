@@ -8,6 +8,8 @@ const SelectComponent = forwardRef(({options, placeholder="Select...", selectedO
   useEffect(()=>{
     if(selectedOption) {
       setInputValue(options.find(option=>option.value===selectedOption).label)
+    } else {
+      setInputValue('')
     }
   },[selectedOption, options])
   const onInputChange = (e) => {
@@ -26,9 +28,7 @@ const SelectComponent = forwardRef(({options, placeholder="Select...", selectedO
   }
   const dropdownBlurred = () => {
     if(selectedOption!==undefined) {
-      if(searchedOptions.findIndex(element=>inputValue.toLowerCase()===element.label.toLowerCase())===-1) {
-        setInputValue((options.find(element=>selectedOption===element.value)).label)
-      } else {
+      if(searchedOptions.findIndex(element=>inputValue.toLowerCase()===element.label.toLowerCase())!==-1) {
         onItemSelected(searchedOptions.find(element=>inputValue.toLowerCase()===element.label.toLowerCase()))
       }
     }
