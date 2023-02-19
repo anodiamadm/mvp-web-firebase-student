@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Flag from "react-flagkit";
 import SelectComponent from "./components/uiLegos/SelectComponent";
-// import Select from "react-dropdown-select";
 
 const options = [
   { value: 'AU', label: 'Australia'},
@@ -37,7 +36,6 @@ const Experiments = () => {
       <div className="experiments-input-field">
         <SelectComponent placeholder="Country..." options={options} selectedOption={selectedOption} onChange={(item)=>setSelectedOption(item)} />
       </div>
-      {/* <Select options={options} onChange={(item) => setSelectedOption(item.value)} /> */}
     </div>
    );
 }

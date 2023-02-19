@@ -5,12 +5,28 @@ import SelectComponent from "./SelectComponent";
 
 const LocationFilter = () => {
   const [countryList, setCountryList] = useState([])
-  const [selectedCountry, setSelectedCountry] = useState('IN')
+  const [selectedCountry, setSelectedCountry] = useState('IN')  
+  const [provinceList, setProvinceList] = useState([])
+  const [selectedProvince, setSelectedProvince] = useState('')
   const locateCountry = async () => {
     const resp = await fetch("https://ipinfo.io/json?token=516ec07e26e604")
     const data = await resp.json()
     let localCountry = countries.find(country => country.country.id===data.country)
     setSelectedCountry(localCountry.country.id)
+    let prvncOptns = []
+    localCountry.country.states.map((state)=>{
+      return (prvncOptns.push({value: state.stateId, label: state.stateName}))
+    })
+    setProvinceList(prvncOptns)
+    console.log("Province List: ", prvncOptns);
+  }
+  const setProvincesForCountryId = (countryId) => {
+    let prvncOptns = []
+    let localCountry = countries.find(country=>country.country.id===selectedCountry)
+    localCountry.country.states.map((state)=>{
+      return (prvncOptns.push({value: state.stateId, label: state.stateName}))
+    })
+    setProvinceList(prvncOptns)
   }
   useEffect(() => {
     let cntryOptns = []
@@ -31,6 +47,11 @@ const LocationFilter = () => {
     setCountryList(cntryOptns)
     locateCountry()
   }, [])
+  const onCountryChange = (countryId) => {
+    setSelectedCountry(countryId)
+    setProvincesForCountryId(countryId)
+    setSelectedProvince('')
+  }
   return (
     <>
       <div className="modalSection">
@@ -40,9 +61,12 @@ const LocationFilter = () => {
           <Flag country={selectedCountry} className="modalComponentMargin" />}
         { countryList.length > 0 ?
           <SelectComponent placeholder="Country..." options={countryList} 
-            onChange={(item)=>setSelectedCountry(item)} selectedOption={selectedCountry} />
+            onChange={onCountryChange} selectedOption={selectedCountry} />
           : null
         }
+        <p>{ selectedProvince!=='' ? selectedProvince : null }</p>
+        <SelectComponent placeholder="State / Province..." options={provinceList} 
+        onChange={(province)=>setSelectedProvince(province)} selectedOption={selectedProvince} />
       </div>
     </>
   );

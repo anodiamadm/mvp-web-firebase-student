@@ -19,11 +19,6 @@ const SelectComponent = forwardRef(({options, placeholder="Select...", selectedO
     }
     setOpen(true)
   }
-  const onInputClick = () => {
-    setInputValue("")
-    setOpen(!open)
-    setSearchedOptions(options)
-  }
   const onItemSelected = (option) => {
     onChange !== undefined && onChange(option.value)
     onChange !== undefined && setInputValue(option.label)
@@ -38,11 +33,22 @@ const SelectComponent = forwardRef(({options, placeholder="Select...", selectedO
       }
     }
   }
+  const dropdownClick = () => {
+    setSearchedOptions(options)
+    setOpen(!open)
+  }
+  const clearDropdown = () => {
+    setInputValue("")
+    setSearchedOptions(options)
+  }
   return (
     <div ref={ref}>
-      <div className="input-container" onClick={onInputClick}>
+      <div className="input-container">
         <input type='text' value={inputValue} placeholder={placeholder} onChange={onInputChange} onBlur={dropdownBlurred} />
-        <div className="input-arrow-container caret-down-position">
+        { selectedOption || inputValue ? 
+        <div className="input-clear-container" onClick={clearDropdown}><i className="fa-solid fa-circle-xmark"></i></div> :
+        null }
+        <div className="input-arrow-container caret-down-position" onClick={dropdownClick}>
           <label className='s13-5 fontn cursor-pointer caret-down'>
             <span><i className="fa fa-caret-down" aria-hidden="true"></i></span>
           </label>

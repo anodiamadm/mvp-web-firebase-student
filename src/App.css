@@ -590,6 +590,8 @@ textarea.materialize-textarea:focus:not([readonly]){
 /* tbd */
 .input-container {
   position: relative;
+  padding: 5px;
+  margin: 5px;
 }
 .option {
   height: 30px;
