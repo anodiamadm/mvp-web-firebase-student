@@ -7,12 +7,9 @@ function SearchModal({setOpenModal}) {
       <div className='modalContainer'>
         <button className='modalBtn' onClick={()=>setOpenModal(false)}><i className="fa-solid fa-x"></i></button>
         <div className="modalHeader">
-          <div>Filters:</div>
-          <i className="fa-solid fa-sliders"></i>
+          <div className='modal-header-text'>Filters: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i className="fa-solid fa-sliders"></i></div>
         </div>
-        <div className="modalLocationFilter">
-          <LocationFilter/>
-        </div>
+        <LocationFilter/>
       </div>
     </div>
   )

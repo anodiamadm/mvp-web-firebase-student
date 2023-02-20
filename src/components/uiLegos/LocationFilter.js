@@ -53,19 +53,24 @@ const LocationFilter = () => {
   }
   return (
     <>
-      <div className="modalSection">
+      <div className="modalSectionHeader">
         <label className="modalBodyText modalComponentMargin">Country: </label>
         { selectedCountry==='INTL' ? 
           <i className="fa-solid fa-globe theme-color modalComponentMargin globe-icon-height"></i> : 
-          <Flag country={selectedCountry} className="modalComponentMargin" />}
+          <Flag country={selectedCountry} className="modalComponentMargin flag-icon" />}
+      </div>    
+      <div className="modalSection">
         { countryList.length > 0 ?
           <SelectComponent placeholder="Country..." options={countryList} 
             onChange={onCountryChange} selectedOption={selectedCountry} drawFlags={true} />
           : null
         }
-        <SelectComponent placeholder="State / Province..." options={provinceList} 
-        onChange={(province)=>setSelectedProvince(province)} selectedOption={selectedProvince} drawFlags={false} />
-        <p>{ selectedProvince!=='' ? selectedProvince : "Nothing Selected" }</p>
+        { provinceList.length > 0 ?
+          <SelectComponent placeholder="State / Province..." options={provinceList} 
+          onChange={(province)=>setSelectedProvince(province)} selectedOption={selectedProvince} drawFlags={false} />
+          : null
+        }
+        {/* <p>{ selectedProvince!=='' ? selectedProvince : "Nothing Selected" }</p> */}
       </div>
     </>
   );

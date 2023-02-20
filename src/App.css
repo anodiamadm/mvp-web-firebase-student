@@ -31,7 +31,6 @@
   --nav-height: 120px;
   --nav-top-media: 127px;
 }
-
 /* colors */
 .ctheme {
   color: var(--ctheme);
@@ -72,7 +71,6 @@
 .c333 {
   color: var(--c333);
 }
-
 /* fonts */
 .s11 {
   font-size: var(--s11);
@@ -104,7 +102,6 @@
 .fontn {
   font-weight: normal;
 }
-
 /* logo */
 .logo-name {
   color: var(--ctheme);
@@ -124,10 +121,9 @@
   text-decoration: none;
 }
 .logo-box {
-  margin: 0 0 0 20px;
-  padding: 0 0 0 20px;
+  margin: 0 0 0 10px;
+  padding: 0 0 0 10px;
 }
-
 /* containers */
 .app-content {
   flex: 2;
@@ -137,7 +133,7 @@ html {
   min-height: 100%;
 }
 .page-boundary {
-  min-width: 220px;
+  min-width: 200px;
 }
 main {
   /* max-width: 1000px; */
@@ -156,7 +152,6 @@ main {
 .sameline-display {
   flex-direction: column;
 }
-
 /* Components */
 .row-display {
   display: inline-flex;
@@ -168,7 +163,6 @@ main {
 .select-box {
   border: 0px;
 }
-
 /* Generic */
 body {
   margin: 0px;
@@ -223,7 +217,6 @@ h6 {
 .theme-color {
   color: var(--ctheme);
 }
-
 /* Navbar */
 nav-anodiam {
   display: flex;
@@ -255,10 +248,12 @@ nav-anodiam {
   transition: 0.3s ease-in-out;
 }
 #navbar li a:hover,
-#navbar li a.active {  color: var(--ctheme);
+#navbar li a.active {
+  color: var(--ctheme);
 }
 #navbar li a:hover::after,
-#navbar li a.active::after {  content: '';
+#navbar li a.active::after {
+  content: '';
   width: 30%;
   height: 2px;
   background: var(--ctheme);
@@ -273,7 +268,6 @@ nav-anodiam {
 #mobile i {
   color: var(--c999);
 }
-
 /* Footer */
 .footer {
   display: flex;
@@ -300,19 +294,17 @@ nav-anodiam {
   color: var(--c999);
   transition: 0.3s ease-in-out;
 }
-.flag-img{
+.flag-img {
   height: 14px;
   width: 21px;
 }
 .left-margin-medium {
   margin-left: 30px;
 }
-
 .footer .footer-box a:hover,
 .footer .footer-box a.active {
   color: var(--ctheme);
 }
-
 .footer .footer-box a:hover::after,
 .footer .footer-box a.active::after {
   content: '';
@@ -326,20 +318,18 @@ nav-anodiam {
 .footer .footer-box .footer-info-left {
   align-items: flex-start;
 }
-
 /* Auth Module */
-.social-btn{
+.social-btn {
   width: 100% !important;
   height: 40px !important;
   line-height: 40px !important;
   font-size: 15px !important;
 }
-.social-btn > div,
-.social-btn > div > svg {
+.social-btn>div,
+.social-btn>div>svg {
   width: 40px !important;
   height: 38px !important;
 }
-
 /* Form Body */
 .page-body {
   display: flex;
@@ -362,11 +352,11 @@ nav-anodiam {
   padding: 10px 20px 0 20px;
   width: 80%;
 }
-.link-with-caption{
+.link-with-caption {
   margin: auto;
   padding-bottom: 10px;
 }
-.link-decor{
+.link-decor {
   color: var(--ctheme);
 }
 .link-decor:hover {
@@ -380,13 +370,14 @@ form {
   margin: 0 20px;
   max-width: 600px;
 }
-form button, form h5 {
+form button,
+form h5 {
   margin: 20px 0;
 }
 input[type=text]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]){  
+textarea.materialize-textarea:focus:not([readonly]) {
   border-color: var(--ctheme-lite);
   border-width: 2px;
   box-shadow: none;
@@ -461,7 +452,7 @@ textarea.materialize-textarea:focus:not([readonly]){
   margin: 0;
   padding: 0;
 }
-.search-text{
+.search-text {
   padding-bottom: 0;
   margin: 0 4px 0 16px;
 }
@@ -476,7 +467,7 @@ textarea.materialize-textarea:focus:not([readonly]){
   border-top-left-radius: 19px;
   border-bottom-left-radius: 19px;
 }
-.fasearch-position{
+.fasearch-position {
   padding: 2px 0 0 4px;
 }
 #search-query {
@@ -486,11 +477,10 @@ textarea.materialize-textarea:focus:not([readonly]){
 .modalBackground {
   z-index: 99;
   background-color: var(--ctheme-lite);
-  /* opacity: 0.98; */
   position: relative;
   top: -3px;
-  left: -16vw;
-  width: 48vw;
+  left: -25vw;
+  width: 63vw;
   border-radius: 11px;
   box-shadow: 0px 0px 10px 10px rgba(191, 191, 191, 0.25);
 }
@@ -537,28 +527,43 @@ textarea.materialize-textarea:focus:not([readonly]){
   color: var(--c777);
   font-weight: bold;
   font-size: 16px;
-  padding: 10px;
-  margin: 10px;
+}
+.modal-header-text{
+  padding-top: 10px;
+  margin-top: 10px;
 }
 .modalBodyText {
   color: var(--c777);
   font-weight: Bold;
-  font-size: 14px;
+  font-size: 15px;
 }
 .modalComponentMargin {
-  padding: 0px;
-  margin: 15px;
+  margin: 0 20px 0 20px;
 }
 .globe-icon-height {
   font-size: 20px;
+}
+.flag-icon {
+  font-size: 20px;
+  padding-top: 20px;
+  height: 40px;
+  width: 30px;
+}
+.modalSectionHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  color: var(--c777);
+  padding: 0;
+  margin: 0;
 }
 .modalSection {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   color: var(--c777);
-  padding: 10px;
-  margin: 10px;
+  padding: 0 10px;
+  margin: 0 10px;
 }
 .caret-down-position {
   float: right;
@@ -587,11 +592,12 @@ textarea.materialize-textarea:focus:not([readonly]){
   padding: 5px;
   margin: 5px;
 }
-/* tbd */
 .input-container {
   position: relative;
-  padding: 5px;
-  margin: 5px;
+  font-size: 8px;
+  min-width: 160px;
+  max-width: 200px;
+  margin-right: 10px;
 }
 .option {
   height: 30px;
@@ -599,7 +605,7 @@ textarea.materialize-textarea:focus:not([readonly]){
   border-bottom: 1px solid var(--cbbb);
   align-items: center;
   cursor: pointer;
-  background-color: rgba(223, 223, 223, 0.7);
+  background-color: rgba(223, 223, 223, .9);
 }
 .option:hover {
   background-color: var(--ctheme-lite);
@@ -616,6 +622,9 @@ textarea.materialize-textarea:focus:not([readonly]){
 }
 .dropdown.visible {
   display: block;
+  max-height: 200px;
+  z-index: 1000;
+  overflow: auto;
 }
 .input-clear-container {
   position: absolute;
@@ -665,16 +674,30 @@ textarea.materialize-textarea:focus:not([readonly]){
     flex-direction: column;
   }
   .modalBackground {
-    left: -24vw;
-    width: 60vw;
+    left: -30vw;
+    width: 72vw;
   }
 }
+
 @media screen and (max-width: 600px) {
+  .logo-box {
+    margin: 0 0 0 3px;
+    padding: 0 0 0 3px;
+  }
   .modalBackground {
     left: -40vw;
     width: 74vw;
   }
   .modalBtn {
     float: left;
+  }
+  .modalSection {
+    flex-direction: column;
+    float: right;
+    padding: 0 10px;
+    margin: 0 10px;
+  }
+  .modalContainer {
+    min-height: 250px;
   }
 }
