@@ -10,12 +10,6 @@ export const countries = [
     {stateId: 'ACT', stateName: 'Australian Capital Territory'},
     {stateId: 'OTH', stateName: 'Other Territories'}
   ]}},
-  {country: {id: 'GB', flag: 'GB', isd: '+44', currency: 'GBP', currencySymbol: '£', countryName: 'United Kingdom', states: [
-    {stateId: 'England', stateName: 'England'},
-    {stateId: 'Northern-Ireland', stateName: 'Northern Ireland'},
-    {stateId: 'Scotland', stateName: 'Scotland'},
-    {stateId: 'Wales', stateName: 'Wales'},
-  ]}},
   {country: {id: 'IN', flag: 'IN', isd: '+91', currency: 'INR', currencySymbol: '₹', countryName: 'India', states: [
     {stateId: 'AN', stateName: 'Andaman Nicobar Islands'},
     {stateId: 'AP', stateName: 'Andhra Pradesh'},
@@ -53,6 +47,12 @@ export const countries = [
     {stateId: 'UP', stateName: 'Uttar Pradesh'},
     {stateId: 'UK', stateName: 'Uttarakhand'},
     {stateId: 'WB', stateName: 'West Bengal'}
+  ]}},
+  {country: {id: 'GB', flag: 'GB', isd: '+44', currency: 'GBP', currencySymbol: '£', countryName: 'United Kingdom', states: [
+    {stateId: 'England', stateName: 'England'},
+    {stateId: 'Northern-Ireland', stateName: 'Northern Ireland'},
+    {stateId: 'Scotland', stateName: 'Scotland'},
+    {stateId: 'Wales', stateName: 'Wales'},
   ]}},
   {country: {id: 'JP', flag: 'JP', isd: '+81', currency: 'JPY', currencySymbol: '¥', countryName: 'Japan', states: [
     {stateId: 'Hokkaido', stateName: 'Hokkaido'},

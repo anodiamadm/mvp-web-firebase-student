@@ -9,14 +9,26 @@ const LocationFilter = () => {
   const [provinceList, setProvinceList] = useState([])
   const [selectedProvince, setSelectedProvince] = useState('')
   const locateCountry = async () => {
-    const resp = await fetch("https://ipinfo.io/json?token=516ec07e26e604")
-    const data = await resp.json()
-    let localCountry = countries.find(country => country.country.id===data.country)
+    // const resp = await fetch("https://ipinfo.io/json?token=516ec07e26e604")
+    // const data = await resp.json()
+    // let localCountry = countries.find(country => country.country.id===data.country)
+    let localCountry = countries.find(country => country.country.id==='AU')
     setSelectedCountry(localCountry.country.id)
     let prvncOptns = []
     localCountry.country.states.map((state)=>{
       return (prvncOptns.push({value: state.stateId, label: state.stateName}))
     })
+    prvncOptns.sort((a, b) => {
+      const nameA = a.label.toUpperCase();
+      const nameB = b.label.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
     setProvinceList(prvncOptns)
   }
   const setProvincesForCountryId = (countryId) => {
@@ -25,6 +37,17 @@ const LocationFilter = () => {
     localCountry.country.states.map((state)=>{
       return (prvncOptns.push({value: state.stateId, label: state.stateName}))
     })
+    prvncOptns.sort((a, b) => {
+      const nameA = a.label.toUpperCase();
+      const nameB = b.label.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
     setProvinceList(prvncOptns)
   }
   useEffect(() => {
@@ -33,8 +56,8 @@ const LocationFilter = () => {
       return (cntryOptns.push({value: country.country.id, label: country.country.countryName}))
     })
     cntryOptns.sort((a, b) => {
-      const nameA = a.label.toUpperCase(); // ignore upper and lowercase
-      const nameB = b.label.toUpperCase(); // ignore upper and lowercase
+      const nameA = a.label.toUpperCase();
+      const nameB = b.label.toUpperCase();
       if (nameA < nameB) {
         return -1;
       }

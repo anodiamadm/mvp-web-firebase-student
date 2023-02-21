@@ -59,7 +59,7 @@ const SelectComponent = forwardRef(({options, placeholder="Select...", selectedO
               return (
                 <div key={opt.value} onClick={()=>onItemSelected(opt)} className="option" >
                   { opt.value==='INTL' ?
-                    <i className="fa-solid fa-globe theme-color modalComponentMargin globe-icon-height"></i> :
+                    <i className="fa-solid fa-globe theme-color modalComponentMargin globe-icon-height international-icon-right-margin"></i> :
                     <Flag country={opt.value} className="modalComponentMargin" />
                   }
                   {opt.label}
@@ -70,7 +70,7 @@ const SelectComponent = forwardRef(({options, placeholder="Select...", selectedO
           <div className={`dropdown ${open ? "visible" : ""}`}>
             { searchedOptions.map(opt => {
               return (
-                <div key={opt.value} onClick={()=>onItemSelected(opt)} className="option" >
+                <div key={opt.value} onClick={()=>onItemSelected(opt)} className="option no-flags-left-margin" >
                   {opt.label}
                 </div>
               )

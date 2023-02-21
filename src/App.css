@@ -626,6 +626,12 @@ textarea.materialize-textarea:focus:not([readonly]) {
   z-index: 1000;
   overflow: auto;
 }
+.international-icon-right-margin {
+  padding-right: 3px;
+}
+.no-flags-left-margin {
+  padding-left: 20px;
+}
 .input-clear-container {
   position: absolute;
   color: var(--caaa);
