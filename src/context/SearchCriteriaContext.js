@@ -3,11 +3,11 @@ import { createContext, useState } from "react";
 export const SearchCriteriaContext = createContext()
 
 const SearchCriteriaContextProvider = ({children}) => {
-  const [srchQuery, setSrchQuery] = useState( {srchString: ''},
-                                              {srchlocation: {countryId: '', provinceId: ''}},
-                                              {srchBoardExam: {boardId: '', yearId: '', subjectId: ''}},
-                                              {srchCompetitiveExam: {examId: '', paperId: ''}},
-                                              {srchProfessionalExam: {professionalExamId: ''}})
+  const [srchQuery, setSrchQuery] = useState({srchString: '',
+                                              countryId: '', provinceId: '',
+                                              boardId: '', yearId: '', subjectId: '',
+                                              examId: '', paperId: '',
+                                              professionalExamId: ''})
   const addSrchString = (srchStr) => {
     let srchQryObj = srchQuery
     srchQryObj.srchString = srchStr
@@ -15,9 +15,10 @@ const SearchCriteriaContextProvider = ({children}) => {
   }
   const addLocation = (countryId, provinceId) => {
     let srchQryObj = srchQuery
-    srchQryObj.srchlocation.countryId = countryId
-    srchQryObj.srchlocation.provinceId = provinceId
+    srchQryObj.countryId = countryId
+    srchQryObj.provinceId = provinceId
     setSrchQuery(srchQryObj)
+    console.log("Qry after Location Change: ", srchQuery);
   }
   const addSrchBoardExam = (boardId, yearId, subjectId) => {
     let srchQryObj = srchQuery

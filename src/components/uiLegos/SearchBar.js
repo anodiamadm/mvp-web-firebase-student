@@ -3,23 +3,22 @@ import { SearchCriteriaContext } from "../../context/SearchCriteriaContext";
 import SearchModal from "./modals/SearchModal";
 
 const SearchBar = () => {
-  const [srchStr, setSrchStr] = useState('')
-  const { srchQuery, addSrchString } = useContext(SearchCriteriaContext)
   const [openModal, setOpenModal] = useState(false)
+  const [srchStr, setSrchStr] = useState('')
+  const { addSrchString } = useContext(SearchCriteriaContext)
   const onSearchStringChange = (e) =>{
     setSrchStr(e.target.value)
+    addSrchString(e.target.value)
   }
   const handleQuerySubmit = (e)=>{
     e.preventDefault();
-    setIsPending(true)
-    if(openModal) {
-      addSrchString(srchStr)
-      console.log('SEARCH QUERRY: ', srchQuery)
+    if(srchStr.length<5){
+      alert('Search string too small!')
     } else {
-      setOpenModal(true)
+      setIsPending(true)
+      setOpenModal(openModal)
+      setIsPending(false)
     }
-    setOpenModal(true)
-    setIsPending(false);
   }
   const searchFocussed = (e)=>{
     e.preventDefault()
@@ -42,5 +41,5 @@ const SearchBar = () => {
     </div>
   );
 }
- 
+
 export default SearchBar;

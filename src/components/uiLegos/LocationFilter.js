@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Flag from "react-flagkit";
+import { SearchCriteriaContext } from "../../context/SearchCriteriaContext";
 import { countries } from "../../dataAccess/GeographicalData";
 import SelectComponent from "./SelectComponent";
 
@@ -8,6 +9,7 @@ const LocationFilter = () => {
   const [selectedCountry, setSelectedCountry] = useState('IN')  
   const [provinceList, setProvinceList] = useState([])
   const [selectedProvince, setSelectedProvince] = useState('')
+  const { addLocation } = useContext(SearchCriteriaContext)
   const locateCountry = async () => {
     // const resp = await fetch("https://ipinfo.io/json?token=516ec07e26e604")
     // const data = await resp.json()
@@ -71,8 +73,13 @@ const LocationFilter = () => {
   }, [])
   const onCountryChange = (countryId) => {
     setSelectedCountry(countryId)
+    addLocation(countryId, selectedProvince)
     setProvincesForCountryId(countryId)
     setSelectedProvince('')
+  }
+  const onProvinceChange = (provinceId) => {
+    setSelectedProvince(provinceId)
+    addLocation(selectedCountry, provinceId)
   }
   return (
     <>
@@ -90,7 +97,7 @@ const LocationFilter = () => {
         }
         { provinceList.length > 0 ?
           <SelectComponent placeholder="State / Province..." options={provinceList} 
-          onChange={(province)=>setSelectedProvince(province)} selectedOption={selectedProvince} drawFlags={false} />
+          onChange={onProvinceChange} selectedOption={selectedProvince} drawFlags={false} />
           : null
         }
         {/* <p>{ selectedProvince!=='' ? selectedProvince : "Nothing Selected" }</p> */}
