@@ -349,8 +349,13 @@ nav-anodiam {
   padding: 30px auto 0 auto;
 }
 .anodiam-form {
+  align-items: center;
   padding: 10px 20px 0 20px;
   width: 80%;
+}
+.modal-form {
+  align-items: center;
+  padding: 10px 20px 0 20px;
 }
 .link-with-caption {
   margin: auto;
@@ -482,7 +487,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   left: -25vw;
   width: 63vw;
   border-radius: 11px;
-  box-shadow: 0px 0px 10px 10px rgba(191, 191, 191, 0.25);
+  box-shadow: 0px 240px 160px 160px rgb(143 143 143 / 50%);
 }
 .modalContainer {
   z-index: 100;
@@ -684,6 +689,75 @@ textarea.materialize-textarea:focus:not([readonly]) {
     width: 72vw;
   }
 }
+.tab-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 500px;
+  height: 300px;
+  background: #f1f1f1;
+  margin: 100px auto 0;
+  word-break: break-all;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+}
+.bloc-tabs {
+  display: flex;
+}
+.tabs {
+  padding: 15px;
+  text-align: center;
+  width: 50%;
+  background: rgba(128, 128, 128, 0.075);
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+  box-sizing: content-box;
+  position: relative;
+  outline: none;
+}
+.tabs:not(:last-child) {
+  border-right: 1px solid rgba(0, 0, 0, 0.274);
+}
+.active-tabs {
+  background-color: white;
+  border-bottom: 1px solid transparent;
+}
+.active-tabs::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 2px);
+  height: 5px;
+  background: rgb(88 147 241);
+}
+.content-tabs {
+  flex-grow: 1;
+}
+.tab-content p {
+  width: 100%;
+  height: 100%;
+}
+.tab-content hr {
+  width: 100px;
+  height: 2px;
+  background-color: var(--c333);
+  margin-bottom: 5px;
+}
+.tab-content h2 {
+  padding: 0px 0 5px 0px;
+}
+.tab-content {
+  background-color: var(--cfff);
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.active-tab-content {
+  display: block;
+}
 
 @media screen and (max-width: 600px) {
   .logo-box {
@@ -691,8 +765,8 @@ textarea.materialize-textarea:focus:not([readonly]) {
     padding: 0 0 0 3px;
   }
   .modalBackground {
-    left: -40vw;
-    width: 74vw;
+    left: -200px;
+    width: 85vw;
   }
   .modalBtn {
     float: left;

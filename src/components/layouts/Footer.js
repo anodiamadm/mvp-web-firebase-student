@@ -1,4 +1,5 @@
 import React from 'react'
+import Flag from 'react-flagkit'
 
 function Footer() {
   return (
@@ -20,7 +21,7 @@ function Footer() {
               </p>
               <p className="grey-text text-lighten-4">
                 <i className="fa fa-phone"></i>&nbsp;&nbsp;+61&nbsp;&nbsp;
-                <img alt='Au' src={ process.env.PUBLIC_URL + '/resources/australia_flag_icon.png' } className="flag-img" />
+                <Flag country='AU' className="flag-icon" />
                 &nbsp;&nbsp;470-142-229
               </p>
               <p className="grey-text text-lighten-4">
